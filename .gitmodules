@@ -1,6 +1,7 @@
 [submodule "wine"]
-    path = wine
-    url = https://github.com/ValveSoftware/wine/
+	path = wine
+	url = https://github.com/chuck-r/wine
+	branch = proton-4.11-strftime
 [submodule "dxvk"]
 	path = dxvk
 	url = https://github.com/ValveSoftware/dxvk/
