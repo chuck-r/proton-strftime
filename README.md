@@ -24,18 +24,18 @@ Using this method to install Proton is, by far, the easiest method providing tha
 **NOTE:** I do not have ESO installed with Steam, so if my instructions are not clear or are incorrect, please let me know.
 
 1. Create the custom Proton directory (if it doesn't exist): `mkdir ~/.steam/root/compatibilitytools.d/`
-2. Download [proton-strftime.7z](https://github.com/chuck-r/Proton/releases/latest/download/proton-strftime.7z) and extract the whole folder inside into ~/.steam/root/compatibilitytools.d
+2. Download [proton-strftime.tar.xz](https://github.com/chuck-r/Proton/releases/latest/download/proton-strftime.tar.xz) and extract the whole folder inside into ~/.steam/root/compatibilitytools.d
 3. Restart the Steam client
 4. Right-click 'The Elder Scrolls Online' in your game library and open `Properties...`
 5. In the General tab, click the checkbox that says "Force the use of a specific Steam Play compatibility tool"
-6. From the drop-down menu select "proton-4.11-6-strftime"
+6. From the drop-down menu select "proton-4.11-7-strftime"
 7. Run the game, and enjoy!
 
 -----
 Without Steam: The Easy Way
 =====
 
-I have provided an [automated installation and run script](https://raw.githubusercontent.com/chuck-r/Proton/proton_4.11/extra/RunESO.sh) in the `extra` folder in this repository. It automates
+I have provided an [automated installation and run script](https://raw.githubusercontent.com/chuck-r/Proton/proton-4.11-strftime/extra/RunESO.sh) in the `extra` folder in this repository. It automates
 "The Hard Way" below.
 
 To setup the ESO Proton folder and automatically install ESO use the following command:
@@ -88,17 +88,17 @@ In my case, I created a directory called ~/.eso. Make the directory and cd into 
 `cd ~/.eso`
 
 ### 2. Extract proton-strftime to ~/.eso
-Extract the folder from [proton-strftime.7z](https://github.com/chuck-r/Proton/releases/latest/download/proton-strftime.7z) to ~/.eso using your favorite archive manager with 7zip support.
+Extract the folder from [proton-strftime.tar.xz](https://github.com/chuck-r/Proton/releases/latest/download/proton-strftime.tar.xz) to ~/.eso using your favorite archive manager.
 
-For ease of future updates, create a symlink for ~/.eso/proton to ~/.eso/proton-4.11-6-strftime
+For ease of future updates, create a symlink for ~/.eso/proton to ~/.eso/proton-4.11-7-strftime
 
-`ln -s ~/.eso/proton-4.11-6-strftime ~/.eso/proton`
+`ln -s ~/.eso/proton-4.11-7-strftime ~/.eso/proton`
 
 This way, you can keep multiple Proton versions in the folder and swap between them by simply changing where the symlink
 points.
 
 ### 3. Copy the Proton prefix
-`cp -R ~/.eso/proton-4.11-6-strftime/dist/share/default_pfx ~/.eso/pfx`
+`cp -R ~/.eso/proton-4.11-7-strftime/dist/share/default_pfx ~/.eso/pfx`
 
 ### 4. Install ESO
 `STEAM_COMPAT_DATA_PATH=~/.eso ~/.eso/proton/proton waitforexitandrun /path/to/Install_ESO.exe`
@@ -108,7 +108,7 @@ The command line I use to run ESO manually:
 
     STEAM_COMPAT_DATA_PATH=~/.eso PROTON_NO_ESYNC=1 mesa_glthread=true vblank_mode=0 ~/.eso/proton/proton waitforexitandrun "$HOME/.eso/pfx/drive_c/Program Files (x86)/Zenimax Online/launcher/Bethesda.net_Launcher.exe"
 
-I have also provided a script in the `extra` folder that can be customized to most use cases. Once the variables are set to your needs, run:
+I have also provided a [script](https://raw.githubusercontent.com/chuck-r/Proton/proton-4.11-strftime/extra/RunESO.sh) in the `extra` folder that can be customized to most use cases. Once the variables within the script are set to your needs, run:
 
     ./RunESO.sh launcher
 
