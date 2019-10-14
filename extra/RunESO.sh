@@ -113,7 +113,7 @@ then
       fi
       archiver="$archiver x -o\"$eso_path\" -aos \"$eso_path/$archive\""
     else
-      archive="proton-strftime.tar.gz"
+      archive="proton-strftime.tar.xz"
       fetcher="$fetcher -LR -o \"$eso_path/$archive\""
       if [ -f "$eso_path/$archive" ]
       then
@@ -128,7 +128,7 @@ then
       fetcher="$fetcher -P \"$eso_path\" -N"
       archiver="$archiver x -o\"$eso_path\" -aos \"$eso_path/$archive\""
     else
-      archive="proton-strftime.tar.gz"
+      archive="proton-strftime.tar.xz"
       fetcher="$fetcher -P \"$eso_path\" -N"
       archiver="$archiver -C \"$eso_path\" -xzf \"$eso_path/$archive\""
     fi
