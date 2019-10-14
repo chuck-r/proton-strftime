@@ -136,11 +136,11 @@ then
 
   echo "Checking for script updates..."
   oldfiletime=$(stat -c %Y "$0")
-  eval $fetcher https://raw.githubusercontent.com/chuck-r/proton-strftime/proton-4.11-strftime/extra/RunESO.sh
+  eval $fetcher https://chuck-r.github.io/proton-strftime/RunESO.sh
 
   if [ $? -ne 0 ]
   then
-    echo -e "\e[1mWarning: Could not fetch script update. This could mean that it has moved. Re-download a copy from https://github.com/chuck-r/proton-strftime.\e[0m"
+    echo -e "\e[1mWarning: Could not fetch script update. This could mean that it has moved. Re-download a copy from https://github.com/chuck-r/proton-strftime/extra.\e[0m"
   else
     newfiletime=$(stat -c %Y "$eso_path/RunESO.sh")
     if [ $oldfiletime -lt $newfiletime ]
