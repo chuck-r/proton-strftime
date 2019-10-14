@@ -15,29 +15,34 @@ game_dir="$eso_path/pfx/drive_c/Program Files (x86)/Zenimax Online"
 
 function printusage()
 {
-  echo "Usage: $0 [launcher|game|install]"
+  echo "Usage: $0 [launcher|game|install [Install_ESO.exe|--prefix-only]]"
   echo "  This script defaults to running the launcher."
   echo
   echo "  Options:"
-  echo "    launcher:  Run the launcher"
+  echo -e "    \e[1mlauncher\e[0m:  Run the launcher"
   echo
-  echo "    game:      Run the game"
+  echo -e "    \e[1mgame\e[0m:      Run the game"
   echo
-  echo "    install [Install_ESO.exe]:"
-  echo "               Automated install script."
+  echo -e "    \e[1minstall [Install_ESO.exe]\e[0m:"
+  echo "               Automated install script"
   echo
-  echo "Automated install script usage:"
+  echo -e "\e[1mAutomated install script usage\e[0m:"
   echo "  The automated install script downloads proton-strftime and installs it"
-  echo "  into $installer_path by default. It also sets up"
-  echo "  the Proton prefix and launches the ESO installer."
+  echo "  into $eso_path by default. It also sets up the Proton prefix"
+  echo "  and launches the ESO installer."
   echo
-  echo "  To change the destination folder path, edit the installer_path variable in the"
+  echo "  If you already have the game installed elsewhere, use the command"
+  echo -e "  '\e[1m$0 install --prefix-only\e[0m' to skip running the installer."
+  echo -e "  Then, modify the \e[1mgame_dir\e[0m variable at the top of this script to set"
+  echo "  the game files location."
+  echo
+  echo -e "  To change the prefix path, edit the \e[1minstaller_path\e[0m variable in the"
   echo "  script."
   echo
   echo "  By default, the script assumes that the ESO installer is in the location"
   echo "  $HOME/Downloads/Install_ESO.exe. If it is in a different"
   echo "  location, specify it to the script by using:"
-  echo "      $0 install /path/to/Install_ESO.exe"
+  echo -e "      \e[1m$0 install /path/to/Install_ESO.exe\e[0m"
 }
 
 arg="launcher"
@@ -56,7 +61,7 @@ if [ "$arg" == "launcher" ]
 then
   if [ ! -d "$eso_path" ]
   then
-    echo "Error: '$eso_path' doesn't exist. Maybe try '$0 install'?"
+    echo -e "\e[1mError: '$eso_path' doesn't exist. Maybe try '$0 install'?\e[0m"
     echo
     printusage
     exit
@@ -67,9 +72,13 @@ then
   eval env $extra_proton_env $eso_path/proton/proton waitforexitandrun "\"$game_dir/The Elder Scrolls Online/game/client/eso64.exe\""
 elif [ "$arg" == "install" ]
 then
+  prefixonly=0
   if [ ! -z "$2" ]
   then
-    if [ ! -f "$2" ]
+    if [ "$2" == "--prefix-only" ]
+    then
+      prefixonly=1
+    elif [ ! -f "$2" ]
     then
       echo "Cannot find ESO installer at $2"
       exit
@@ -80,10 +89,10 @@ then
 
   if [ ! -f "$installer_path" ]
   then
-    echo "Error: Cannot find ESO installer $installer_path. Place"
-    echo "the installer at that location, or re-run the command"
-    echo "specifying the installer path."
-    echo "(i.e.: $0 install /path/to/Install_ESO.exe)"
+    echo -e "\e[1mError: Cannot find ESO installer $installer_path. Place"
+    echo -e "the installer at that location, or re-run the command"
+    echo -e "specifying the installer path."
+    echo -e "(i.e.: $0 install /path/to/Install_ESO.exe)\e[0m"
     echo
     printusage
     exit
@@ -102,7 +111,7 @@ then
     fetcher="$(which curl)"
     if [ -z "$fetcher" ]
     then
-      echo "Error: wget or curl not installed, cannot fetch the archive. Please intall wget or curl."
+      echo -e "\e[1mError: wget or curl not installed, cannot fetch the archive. Please intall wget or curl.\e[0m"
       exit
     fi
     fetcher="$fetcher -LR -o \"$eso_path/$archive\""
@@ -120,7 +129,7 @@ then
 
   if [ $? -ne 0 ]
   then
-    echo "Error: Could not fetch $archive"
+    echo -e "\e[1mError: Could not fetch $archive\e[0m"
     rmdir "$eso_path" 2>/dev/null
     exit
   fi
@@ -130,7 +139,7 @@ then
 
   if [ $? -ne 0 ]
   then
-    echo "Error: Could not extract $eso_path/$archive"
+    echo -e "\e[1mError: Could not extract $eso_path/$archive\e[0m"
     rm "$eso_path/$archive"
     exit
   fi
@@ -149,6 +158,9 @@ then
   cp -R "$eso_path/proton/dist/share/default_pfx" "$eso_path/pfx"
   echo " Done."
 
-  echo "Running ESO installer..."
-  STEAM_COMPAT_DATA_PATH="$eso_path" "$eso_path/proton/proton" waitforexitandrun "$installer_path"
+  if [ $prefixonly -eq 0 ]
+  then
+    echo "Running ESO installer..."
+    STEAM_COMPAT_DATA_PATH="$eso_path" "$eso_path/proton/proton" waitforexitandrun "$installer_path"
+  fi
 fi
