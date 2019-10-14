@@ -54,6 +54,13 @@ fi
 
 if [ "$arg" == "launcher" ]
 then
+  if [ ! -d "$eso_path" ]
+  then
+    echo "Error: '$eso_path' doesn't exist. Maybe try '$0 install'?"
+    echo
+    printusage
+    exit
+  fi
   eval env $extra_proton_env $eso_path/proton/proton waitforexitandrun "\"$game_dir/Launcher/Bethesda.net_Launcher.exe\""
 elif [ "$arg" == "game" ]
 then
@@ -86,13 +93,8 @@ then
   mkdir -p "$eso_path"
   echo " Done."
 
-  archiver="$(which 7z)"
-  if [ -z "$archiver" ]
-  then
-    archiver="$(which tar)"
-  fi
-
-  archive=""
+  archive="proton-strftime.tar.xz"
+  archiver="$(which tar) -C \"$eso_path\" -xJf \"$eso_path/$archive\""
 
   fetcher="$(which wget)"
   if [ -z "$fetcher" ]
@@ -103,35 +105,13 @@ then
       echo "Error: wget or curl not installed, cannot fetch the archive. Please intall wget or curl."
       exit
     fi
-    if [ "$archiver" != "${archiver%7z}" ]
+    fetcher="$fetcher -LR -o \"$eso_path/$archive\""
+    if [ -f "$eso_path/$archive" ]
     then
-      archive="proton-strftime.7z"
-      fetcher="$fetcher -LR -o \"$eso_path/$archive\""
-      if [ -f "$eso_path/$archive" ]
-      then
-        fetcher="$fetcher -z \"$eso_path/$archive\""
-      fi
-      archiver="$archiver x -o\"$eso_path\" -aos \"$eso_path/$archive\""
-    else
-      archive="proton-strftime.tar.xz"
-      fetcher="$fetcher -LR -o \"$eso_path/$archive\""
-      if [ -f "$eso_path/$archive" ]
-      then
-        fetcher="$fetcher -z \"$eso_path/$archive\""
-      fi
-      archiver="$archiver -C \"$eso_path\" -xzf \"$eso_path/$archive\""
+      fetcher="$fetcher -z \"$eso_path/$archive\""
     fi
   else
-    if [ "$archiver" != "${archiver%7z}" ]
-    then
-      archive="proton-strftime.7z"
-      fetcher="$fetcher -P \"$eso_path\" -N"
-      archiver="$archiver x -o\"$eso_path\" -aos \"$eso_path/$archive\""
-    else
-      archive="proton-strftime.tar.xz"
-      fetcher="$fetcher -P \"$eso_path\" -N"
-      archiver="$archiver -C \"$eso_path\" -xzf \"$eso_path/$archive\""
-    fi
+    fetcher="$fetcher -P \"$eso_path\" -N"
   fi
 
   fetcher="$fetcher https://github.com/chuck-r/Proton/releases/latest/download/$archive"
