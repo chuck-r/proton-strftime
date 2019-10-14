@@ -136,7 +136,7 @@ then
 
   echo "Checking for script updates..."
   oldfiletime=$(stat -c %Y "$0")
-  eval $fetcher https://raw.githubusercontent.com/chuck-r/proton-strftime/extra/extra/RunESO.sh
+  eval $fetcher https://raw.githubusercontent.com/chuck-r/proton-strftime/proton-4.11-strftime/extra/RunESO.sh
 
   if [ $? -ne 0 ]
   then
@@ -148,6 +148,12 @@ then
       echo -e "\e[1mUpdating script and re-executing.\e[0m"
       cp -a "$eso_path/RunESO.sh" "$0"
       chmod +x "$0"
+
+      sed -ri "s|^installer_path=.*$|installer_path=\"$installer_path\"|" "$0"
+      sed -ri "s|^eso_path=.*$|eso_path=\"$eso_path\"|" "$0"
+      sed -ri "s|^extra_proton_env=.*$|extra_proton_env=\"$extra_proton_env\"|" "$0"
+      sed -ri "s|^game_dir=.*$|game_dir=\"$game_dir\"|" "$0"
+
       eval $0 $@
       exit
     fi
