@@ -35,7 +35,7 @@ clear or are incorrect, please let me know.
 
 -----
 
-# Without Steam: The Easy Way
+# The Easy Way: Without Steam
 
 I have provided a [script](https://raw.githubusercontent.com/chuck-r/proton-strftime/proton-4.11-strftime/extra/RunESO.sh) in the `extra` folder in this repository. It automates the process of
 downloading proton-strftime, seting up a prefix, running the game, and updating
@@ -64,8 +64,8 @@ this, modify the `eso_path` variable at the top of the script.
 This use case is useful if you already have the game installed in Wine or the
 game data files in another location. The basic steps are:
 
-    1. Run `./RunESO.sh install --prefix-only`
-    2. Edit the `game_dir` variable at the top of the script to point to the path of your game data files (usually something like /some/wine/prefix/drive_c/Program Files (x86)/Zenimax Online)
+1. Run `./RunESO.sh install --prefix-only`
+2. Edit the `game_dir` variable at the top of the script to point to the path of your game data files (usually something like /some/wine/prefix/drive_c/Program Files (x86)/Zenimax Online)
 
 The folder that `game_dir` points to should have a structure like this:
 
