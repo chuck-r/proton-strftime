@@ -156,6 +156,8 @@ then
 
       eval $0 $@
       exit
+    else
+      echo "No update needed."
     fi
   fi
 
