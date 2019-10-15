@@ -27,6 +27,27 @@ clear or are incorrect, please let me know.
 
 1. Create the custom Proton directory (if it doesn't exist): `mkdir ~/.steam/root/compatibilitytools.d/`
 2. Download [proton-strftime.tar.xz](https://github.com/chuck-r/proton-strftime/releases/latest/download/proton-strftime.tar.xz) and extract the whole folder inside into ~/.steam/root/compatibilitytools.d
+
+   Once completed, you should have a folder structure like this:
+   <pre>
+        ~/.steam/root/compatibilitytools.d/
+        |
+        |__ proton-[version]-strftime/
+        |   |
+        |   |__ compatibilitytool.vdf
+        |   |__ dist/
+        |   |__ dist.lock
+        |   |__ filelock.py
+        |   |__ LICENSE
+        |   |__ proton
+        |   |__ proton_3.7_tracked_files
+        |   |__ toolmanifest.vdf
+        |   |__ user_settings.sample.py
+        |   |__ version
+        |
+        |__ (possibly other custom Proton versions)
+   </pre>
+
 3. Restart the Steam client
 4. Right-click 'The Elder Scrolls Online' in your game library and open `Properties...`
 5. In the General tab, click the checkbox that says "Force the use of a specific Steam Play compatibility tool"
