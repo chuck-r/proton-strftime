@@ -37,7 +37,7 @@ clear or are incorrect, please let me know.
 
 # The Easy Way: Without Steam
 
-I have provided a [script](https://raw.githubusercontent.com/chuck-r/proton-strftime/proton-4.11-strftime/extra/RunESO.sh) in the `extra` folder in this repository. It automates the process of
+I have provided a [script](https://chuck-r.github.io/proton-strftime/RunESO.sh) in the `extra` folder in this repository. It automates the process of
 downloading proton-strftime, seting up a prefix, running the game, and updating
 proton-strftime. Download the script from the link, save it, and make it
 executable by issuing the following command:
@@ -136,7 +136,7 @@ The command line I use to run ESO manually:
 
     STEAM_COMPAT_DATA_PATH=~/.eso PROTON_NO_ESYNC=1 mesa_glthread=true vblank_mode=0 ~/.eso/proton/proton waitforexitandrun "$HOME/.eso/pfx/drive_c/Program Files (x86)/Zenimax Online/launcher/Bethesda.net_Launcher.exe"
 
-I have also provided a [script](https://raw.githubusercontent.com/chuck-r/proton-strftime/proton-4.11-strftime/extra/RunESO.sh) in the `extra` folder that can be customized to most use cases. Once the variables at the top of the script are set to your needs, run:
+I have also provided a [script](https://chuck-r.github.io/proton-strftime/RunESO.sh) in the `extra` folder that can be customized to most use cases. Once the variables at the top of the script are set to your needs, run:
 
     ./RunESO.sh
 
