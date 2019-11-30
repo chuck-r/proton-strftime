@@ -51,7 +51,7 @@ clear or are incorrect, please let me know.
 3. Restart the Steam client
 4. Right-click 'The Elder Scrolls Online' in your game library and open `Properties...`
 5. In the General tab, click the checkbox that says "Force the use of a specific Steam Play compatibility tool"
-6. From the drop-down menu select "proton-4.11-8-strftime"
+6. From the drop-down menu select "proton-4.11-9-strftime"
 7. Run the game, and enjoy!
 
 -----
@@ -137,16 +137,16 @@ In my case, I created a directory called ~/.eso. Make the directory and cd into 
 ### 2. Extract proton-strftime to ~/.eso
 Extract the folder from [proton-strftime.tar.xz](https://github.com/chuck-r/proton-strftime/releases/latest/download/proton-strftime.tar.xz) to ~/.eso using your favorite archive manager.
 
-For ease of future updates, create a symlink for ~/.eso/proton to ~/.eso/proton-4.11-8-strftime
+For ease of future updates, create a symlink for ~/.eso/proton to ~/.eso/proton-4.11-9-strftime
 
-    ln -s ~/.eso/proton-4.11-8-strftime ~/.eso/proton
+    ln -s ~/.eso/proton-4.11-9-strftime ~/.eso/proton
 
 This way, you can keep multiple Proton versions in the folder and swap between them by simply changing where the symlink
 points.
 
 ### 3. Copy the Proton prefix
 
-    cp -R ~/.eso/proton-4.11-8-strftime/dist/share/default_pfx ~/.eso/pfx
+    cp -R ~/.eso/proton-4.11-9-strftime/dist/share/default_pfx ~/.eso/pfx
 
 ### 4. Install ESO
 
