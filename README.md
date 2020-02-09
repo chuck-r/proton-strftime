@@ -1,3 +1,9 @@
+# THIS REPO IS NOW OBSOLETE
+
+As of Feb 8, 2019, Proton is now version 5.0, incorporating Wine 5.0 changes. The strftime() changes have been completed as of Wine 5.0. Therefore, vanilla Proton will now support these changes and this repository is no longer necessary.
+
+-----
+
 ##### [Original Proton README](https://github.com/ValveSoftware/Proton/README.md)
 
 # What is this?
